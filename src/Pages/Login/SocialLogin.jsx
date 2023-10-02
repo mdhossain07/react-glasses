@@ -1,26 +1,34 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const SocialLogin = () => {
-  const { googleLogin } = useContext(AuthContext);
+  const { googleLogin, githubLogin } = useContext(AuthContext);
 
-  const handleGoogle = () => {
-    googleLogin()
+  const handleSocialLogin = (media) => {
+    media()
       .then((res) => {
         toast.success("Successfully Logged In!");
-        console.log(res.user);
       })
-
       .catch((err) => console.log(err));
   };
 
   return (
     <>
       <div className="divider">continue with</div>
-      <div className="">
-        <button onClick={handleGoogle} className="btn btn-neutral">
+      <div className="flex justify-around">
+        <button
+          onClick={() => handleSocialLogin(googleLogin)}
+          className="btn btn-neutral"
+        >
           Google
+        </button>
+        <button
+          onClick={() => handleSocialLogin(githubLogin)}
+          className="btn btn-neutral"
+        >
+          Github
         </button>
       </div>
     </>
